@@ -27,7 +27,7 @@
 `scipy`,`numpy`,`random`,`math`,`librosa`,`re`,`os`,`json`,`soundfile`,`tqdm`,`yaml`
 
 ## 操作
-* 滤波器的数量不限，需要添加时，需在`wav_config.yaml`中原滤波器下方添加**六个属性**：`type`，`enable`，`limit_down`,`limit_up`,`filter_order`,`bypass_period`,并对属性进行赋值，以此法添加滤波器。
+* 滤波器的数量不限，需要添加时，需在`wav_config.yaml`中原滤波器下方添加**六个属性**：`type`，`enable`，`limit_down`,`limit_up`,`filter_order`,`bypass_period`,并对属性进行赋值，以此法添加滤波器。注：目前只能添加高通滤波器和低通滤波器。
 #### 操作举例
 以给`speech`添加一个低通滤波器和一个高通滤波器举例。<br>
 未添加滤波器的原代码:
@@ -55,7 +55,7 @@ speech:
           filter_order: 4
           bypass_period: 4
 ```  
-添加低通滤波器后的代码
+添加低通滤波器、高通滤波器后的代码
 ```ruby  
 speech:
     path:...
