@@ -11,7 +11,7 @@
   * `gain`、`filter`、`set_file_gap`：都可以通过`enable`属性进行启用或关闭，分别给数据加**增益**、**滤波器**、**静默区间**
   * `gain`、`filter`的`limit_down`、`limit_up`：分别是**增益**（单位：dB）和滤波器**截止频率**（单位：hz）的最高值和最低值，增益和截止频率会在此区间内随机产生数值。
   * `gain`的`mute_period`<br>
-    `filter`的`bypass_period`：分别是增益、滤波器**静默的概率**，例如：若bypass_period: 5,则滤波器被静默的概率就是**1/5**，mute_period同理。
+    `filter`的`bypass_period`：分别是增益、滤波器**静默的概率**，例如：若`bypass_period: 5`,则滤波器被静默的概率就是**1/5**，`mute_period`同理。
   * `set_file_gap`的`time`、`period`：
     * `time`：加给数据的静默区间的**长度**，单位：s
     * `period`：静默区间的**生效概率**。
