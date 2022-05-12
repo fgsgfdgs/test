@@ -6,7 +6,9 @@
 * `samplerate`：采样率
 * `data_path`：音频数据生成的地址
 * `all_file_length`，单位'h'、`one_file_length`，单位：s,两者均为数据的**长度属性**，数据具体点数与**采样率**有关。
-* `speech`，`noise`，`white`，`rev`：人声，噪声，白噪，混响。`path`是其原始数据的**地址**。
+* `speech`，`noise`，`white`，`rev`：人声，噪声，白噪，混响。
+* `path`：一个数组，[0]是其原始数据的**地址**，[1]的大小，代表从该地址抽取数据的概率的大小。
+(第二个值说明：一个地址中的数据被抽取的概率为，此地址的[1] / (path下面所有地址的[1]之和))
 * `speech`：
   * `gain`、`filter`、`set_file_gap`：都可以通过`enable`属性进行启用或关闭，分别给数据加**增益**、**滤波器**、**静默区间**
   * `gain`、`filter`的`limit_down`、`limit_up`：分别是**增益**（单位：dB）和滤波器**截止频率**（单位：hz）的最高值和最低值，增益和截止频率会在此区间内随机产生数值。
@@ -15,6 +17,7 @@
   * `set_file_gap`的`time`、`period`：
     * `time`：加给数据的静默区间的**长度**，单位：s
     * `period`：静默区间的**生效概率**。
+  * `mute_clean_limit`: 当人声被静默时，会产生一个全为`limit_up`的序列，用来度量信噪比，而来调整人声的幅值。保证噪声的幅值在正常的范围内。
 * `noise`、`white`：
   * `align_size`：使数据长度对齐其`value`值，单位：s。
   * `filter`：同`speech`。
@@ -26,7 +29,7 @@
   * `bypass_period`：静默概率的倒数。上文已做说明。
   
 ## 需要安装的包：
-`scipy`,`numpy`,`random`,`math`,`librosa`,`re`,`os`,`json`,`soundfile`,`tqdm`,`yaml`
+`scipy`,`numpy`,`random`,`math`,`librosa`,`re`,`os`,`json`,`soundfile`,`tqdm`,`yaml`,`collections`
 
 ## 操作
 * 滤波器的数量不限，需要添加时，需在`wav_config.yaml`中原滤波器下方添加**六个属性**：`type`，`enable`，`limit_down`,`limit_up`,`filter_order`,`bypass_period`,并对属性进行赋值，以此法添加滤波器。# 注：目前只能添加高通滤波器和低通滤波器。
